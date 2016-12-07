@@ -1,4 +1,4 @@
-# externalwidget-server-1
+# externalwidget-server-2
 <!--
 Created By: Marco Dagolini
 Version: 1.1
@@ -39,13 +39,17 @@ Email: mdagolini@liveperson.com
                   var SDK=lpTag.agentSDK;
                   SDK.init();
                   setInterval(function(){ 
+			   
 			   var onError = function(err) {
   				alert("error");
 	                   };
+			  
+			   var onSuccess = function(givemearesult) {
+                                var tokenstored = givemearesult.customerDetails[0].customerId;
+                                localStorage.setItem('LPCustomerID', tokenstored);
+			   };   
 			   var pathToData = "SDE";
 			   lpTag.agentSDK.get(pathToData, onSuccess, onError);
-                           var tokenstored = givemearesult.customerDetails[0].customerId;
-                           localStorage.setItem('LPCustomerID', tokenstored);
 						     
                   }, 1000);
             });
