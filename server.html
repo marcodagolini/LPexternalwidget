@@ -38,8 +38,6 @@ Email: mdagolini@liveperson.com
             $(document).ready(function() {
                   
 		  
-		  var notificationHandler = function() {};
-		  var blurHandler = function() {};
 		  var ActiveWindow = function() {
                   	setInterval(function(){ 
 			   
@@ -58,11 +56,8 @@ Email: mdagolini@liveperson.com
 		  };
 		    
 		  var SDK=lpTag.agentSDK;
-                  SDK.init({
-			  notificationCallback:notificationHandler,
-			  visitorFocusedCallback:ActiveWindow,
-			  visitorBlurredCallback:blurHandler
-		  });
+                  SDK.init();
+		  SDK.onVisitorFocused(ActiveWindow);
             });
   
         
