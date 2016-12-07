@@ -1,1 +1,172 @@
 # externalwidget-server
+<!--
+Created By: Marco Dagolini
+Version: 1.1
+Date: 8/7/16
+Email: mdagolini@liveperson.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  
+  
+
+
+  
+    
+    <head>
+        <meta charset="utf-8">
+        <title>LivePerson IdP Integration</title>
+        <script src="https://lpcdn-a.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdn.auth0.com/js/lock/10.2.1/lock.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    </head>
+    <body>
+      
+     
+      
+    <div id="contenitore" style="border:10px solid transparent; width:294px; height:280px; background-color:grey">
+         <div id="titolo" style="float:left; width:194px; height:100px; background-color:transparent"><br><p id="scrittatitolo" align="center" style="color:black">Waiting for oAuth check...</p> </div>
+         <div id="picture" style="float:left; background-size: 100%; width:100px; height:100px"></div>
+         <div id="margine" style="float:left; width:294px; height:40px"></div>
+	 <div id="dati" style="width:240px; margin-left:50px; height:140px">
+
+                <p id="Auth_Name"></p>
+                <p id="Auth_Phone"></p>
+                <p id="Auth_Email"></p>
+    
+                <p id="Auth_Balance"></p>
+
+        </div>
+
+     </div>
+      
+      
+     <script type="text/javascript">
+              
+            var url_unknow = 'https://i.imgur.com/uWaZ2R8.png';
+            $(document).ready(function() {
+              
+                       var SDK=lpTag.agentSDK;
+                       SDK.init();
+              
+      
+                setTimeout(function(){ //gestione IdP
+                       
+                       
+                       function myCallback() {
+                                setInterval(function(){ 
+      		             
+                                               var onSuccess = function(givemearesult) {
+				
+					              var tokenstored = givemearesult.customerDetails[0].customerId;
+						     
+                                                      if (tokenstored == "unknown") {
+							      
+							                document.getElementById("scrittatitolo").innerHTML = "This Visitor is NOT authenticated";
+                                                                        document.getElementById("scrittatitolo").style.color = "black";
+                                                                        document.getElementById("Auth_Name").style.color = "black";
+                                                                        document.getElementById("Auth_Phone").style.color = "black";
+                                                                        document.getElementById("Auth_Email").style.color = "black";
+                                                                        document.getElementById("Auth_Balance").style.color = "black";
+							                document.getElementById("Auth_Name").innerHTML = '';
+                                                                        document.getElementById("Auth_Phone").innerHTML = '';
+                                                                        document.getElementById("Auth_Email").innerHTML = '';
+                                                                        document.getElementById("Auth_Balance").innerHTML = '';
+                                                                        document.getElementById("contenitore").style.backgroundColor = "yellow";
+                                                                        document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
+ 							      
+						      }
+					              else {
+							      
+							           // var data = JSON.parse(localStorage.getItem('profile'));
+                                                                   // var identificativo = data.user_id;
+                                                                   // var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ identificativo + "'";
+							           var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ tokenstored + "'";
+                                                                   var queryString = encodeURIComponent(String);        
+                                                                   var myURL = 'https://docs.google.com/spreadsheets/d/1-bGbupGHbTfYv0aNEchYzU2dvIPTWiYGNaF427AO9oI/gviz/tq?gid=342369015&tq=' + queryString;
+                                                                   var query = new google.visualization.Query(myURL);
+                                                                   query.send(handleQueryResponse);
+                                                                   function handleQueryResponse(response) {
+									    
+                                                                                                           if (response.isError()) {
+                                                                                                                                    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                                                                                                                                    return;
+                                                                                                                                               }
+                                                                                                          
+                                                                                                           var data = response.getDataTable();
+                                                                                                           if (data.getNumberOfRows() == 0){
+                                                                                                                                     document.getElementById("scrittatitolo").innerHTML = "Warning!! Invalid oAuth Token";
+                                                                                                                                     document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
+                                                                                                                                     document.getElementById("scrittatitolo").style.color = "red";
+														                     document.getElementById("Auth_Name").innerHTML = 'Name: ??';
+                                                                                                           	                     document.getElementById("Auth_Phone").innerHTML = 'Phone: ??';
+                                                                                                          	                     document.getElementById("Auth_Email").innerHTML = 'Email: ??';
+                                                                                                          	                     document.getElementById("Auth_Balance").innerHTML = 'Balance: ??';
+														                     document.getElementById("Auth_Name").style.color = "red";
+                                                                                                          	                     document.getElementById("Auth_Phone").style.color = "red";
+                                                                                                          	                     document.getElementById("Auth_Email").style.color = "red";
+                                                                                                          	                     document.getElementById("Auth_Balance").style.color = "red";
+                                                                                                                                     document.getElementById("contenitore").style.backgroundColor = "white";
+                                                                                                                                               }
+									                                   else{                                                                                                                
+                                                                                                           var auth_id = data.getValue(0, 0);
+                                                                                                           var auth_name = data.getValue(0, 1);
+                                                                                                           var auth_phone = data.getValue(0, 2);
+                                                                                                           var auth_email = data.getValue(0, 3);
+                                                                                                           var auth_picture = data.getValue(0, 4);
+                                 
+                                                                                                           var auth_balance = data.getValue(0, 5);
+                                                                                                           document.getElementById("picture").style.backgroundImage = 'url('+auth_picture+')';
+                                                                                                           document.getElementById("Auth_Name").innerHTML = 'Name: ' + auth_name;
+                                                                                                           document.getElementById("Auth_Phone").innerHTML = 'Phone: ' +auth_phone;
+                                                                                                           document.getElementById("Auth_Email").innerHTML = 'Email: ' + auth_email;
+                                                                                                           document.getElementById("Auth_Balance").innerHTML = 'Balance: '+ auth_balance;
+                                                                                                           document.getElementById("scrittatitolo").style.color = "white";
+                                                                                                           document.getElementById("Auth_Name").style.color = "white";
+                                                                                                           document.getElementById("Auth_Phone").style.color = "white";
+                                                                                                           document.getElementById("Auth_Email").style.color = "white";
+                                                                                                           document.getElementById("Auth_Balance").style.color = "white";
+                                                                                                           document.getElementById("scrittatitolo").innerHTML = "Authenticated Visitor";
+                                                                                                           document.getElementById("contenitore").style.backgroundColor = "green";
+                                                                                                                  }
+							      
+							      
+						                                                       };
+						               }
+						      };
+					              var onError = function(err) {
+  					                    alert("error");
+					              };
+					              var pathToData = "SDE";
+					              lpTag.agentSDK.get(pathToData, onSuccess, onError);
+					             
+					              // var pathToData = "visitorInfo.visitorName";
+                                                      // lpTag.agentSDK.get(pathToData, onSuccess, onError);
+							
+					
+   
+                                               }, 10000);
+                                         };
+	              
+		    
+		           var options = {packages: ['corechart'], "callback" : myCallback};
+                           google.load('visualization', '1', options);
+			
+	         }, 3000);
+              
+              
+           });
+  
+        
+      </script>    
+      
+      
+      
+  </body>
+</html>
