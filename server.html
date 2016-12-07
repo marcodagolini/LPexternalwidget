@@ -39,8 +39,13 @@ Email: mdagolini@liveperson.com
                   var SDK=lpTag.agentSDK;
                   SDK.init();
                   setInterval(function(){ 
-                        var tokenstored = givemearesult.customerDetails[0].customerId;
-                        localStorage.setItem('LPCustomerID', tokenstored);
+			   var onError = function(err) {
+  				alert("error");
+	                   };
+			   var pathToData = "SDE";
+			   lpTag.agentSDK.get(pathToData, onSuccess, onError);
+                           var tokenstored = givemearesult.customerDetails[0].customerId;
+                           localStorage.setItem('LPCustomerID', tokenstored);
 						     
                   }, 1000);
             });
