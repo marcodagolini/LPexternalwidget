@@ -37,10 +37,10 @@ Email: mdagolini@liveperson.com
   
             $(document).ready(function() {
                   
-		  
+		  var NonActiveWindow = function() {};
 		  var ActiveWindow = function() {
                   	setInterval(function(){ 
-			   alert("1");
+			   
 			   	var onError = function(err) {
   					alert("error");
 	                   	};
@@ -58,7 +58,8 @@ Email: mdagolini@liveperson.com
 		  var SDK=lpTag.agentSDK;
                   SDK.init();
 		  SDK.onVisitorFocused(ActiveWindow);
-		    alert("0");
+		  SDK.onVisitorBlurred(NonActiveWindow);
+		   
             });
   
         
