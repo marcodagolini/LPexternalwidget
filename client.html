@@ -51,10 +51,11 @@ Email: mdagolini@liveperson.com
             var url_unknow = 'https://i.imgur.com/uWaZ2R8.png';
             $(document).ready(function() {
               
-                       
+                       var SDK=lpTag.agentSDK;
+                       SDK.init();
               
       
-                function core(){ //gestione IdP
+                setTimeout(function(){ //gestione IdP
                        
                        
                        function myCallback() {
@@ -156,18 +157,8 @@ Email: mdagolini@liveperson.com
 		           var options = {packages: ['corechart'], "callback" : myCallback};
                            google.load('visualization', '1', options);
 			
-	         };
+	         }, 3000);
               
-		 var SDK=lpTag.agentSDK;
-                 SDK.init();
-		 var IDstored = localStorage.getItem('LPCustomerID');
-		    
-		 core();
-		    
-		 setInterval(function(){
-			 var currentIDstored = localStorage.getItem('LPCustomerID');	    
-		 },1000 );
-		    
               
            });
   
