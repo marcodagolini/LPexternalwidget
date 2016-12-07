@@ -37,10 +37,16 @@ Email: mdagolini@liveperson.com
   
             $(document).ready(function() {
                   
-		  var NonActiveWindow = function() {};
+		  var NonActiveWindow = function() {
+		       
+		  };
 		  var ActiveWindow = function() {
                   	setInterval(function(){ 
 			   
+				
+				var NonActiveWindow = function() {
+  					return;
+	                   	};
 			   	var onError = function(err) {
   					alert("error");
 	                   	};
@@ -51,6 +57,7 @@ Email: mdagolini@liveperson.com
 			   	};   
 			   	var pathToData = "SDE";
 			   	lpTag.agentSDK.get(pathToData, onSuccess, onError);
+				lpTag.agentSDK.onVisitorBlurred(NonActiveWindow);
 						     
                   	}, 1000);
 		  };
@@ -58,7 +65,7 @@ Email: mdagolini@liveperson.com
 		  var SDK=lpTag.agentSDK;
                   SDK.init();
 		  SDK.onVisitorFocused(ActiveWindow);
-		  SDK.onVisitorBlurred(NonActiveWindow);
+		 
 		   
             });
   
