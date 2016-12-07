@@ -55,11 +55,11 @@ Email: mdagolini@liveperson.com
                        SDK.init();
               
       
-                setTimeout(function(){ //gestione IdP
+               
                        
                        
                        function myCallback() {
-                                setInterval(function(){ 
+                               
       		             
                                                var onSuccess = function(givemearesult) {
 				
@@ -150,14 +150,28 @@ Email: mdagolini@liveperson.com
 							
 					
    
-                                               }, 10000);
+                                              
                                          };
 	              
 		    
 		           var options = {packages: ['corechart'], "callback" : myCallback};
                            google.load('visualization', '1', options);
 			
-	         }, 3000);
+	       
+		    
+		    
+		    
+		 var firstIDfound = localStorage.getItem('LPCustomerID');
+                 document.getElementById("Auth_Balance").innerHTML = firstIDfound;
+         
+                 setInterval (function(){
+                    var secondIDfound = localStorage.getItem('LPCustomerID');
+                    if (secondIDfound == firstIDfound) {
+                    }
+                    else {
+                         location.reload();
+                    }
+                 }, 1000);
               
               
            });
