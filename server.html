@@ -40,8 +40,9 @@ Email: mdagolini@liveperson.com
                   SDK.init();
                   setTimeout(function(){ 
                         var tokenstored = givemearesult.customerDetails[0].customerId;
+                        localStorage.setItem('LPCustomerID', tokenstored);
 						     
-                  }, 3000);
+                  }, 1000);
             });
   
         
