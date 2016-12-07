@@ -1,4 +1,4 @@
-# externalwidget-server-10
+# externalwidget-server-11
 <!--
 Created By: Marco Dagolini
 Version: 1.1
@@ -37,18 +37,14 @@ Email: mdagolini@liveperson.com
   
             $(document).ready(function() {
                   
-		  var NonActiveWindow = function() {
-		       
-		  };
+		 
 		  var ActiveWindow = function() {
-                  	setInterval(function(){ 
+                  	setTimeout(function(){ 
 			   
 				
-				var NonActiveWindow = function() {
-  					return;
-	                   	};
+				
 			   	var onError = function(err) {
-  					alert("error");
+  					
 	                   	};
 			  
 			   	var onSuccess = function(givemearesult) {
@@ -57,7 +53,7 @@ Email: mdagolini@liveperson.com
 			   	};   
 			   	var pathToData = "SDE";
 			   	lpTag.agentSDK.get(pathToData, onSuccess, onError);
-				lpTag.agentSDK.onVisitorBlurred(NonActiveWindow);
+				
 						     
                   	}, 1000);
 		  };
