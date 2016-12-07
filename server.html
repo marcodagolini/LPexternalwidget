@@ -38,20 +38,24 @@ Email: mdagolini@liveperson.com
             $(document).ready(function() {
                   var SDK=lpTag.agentSDK;
                   SDK.init();
-                  setInterval(function(){ 
+		  
+		  var ActiveWindow = function() {
+                  	setInterval(function(){ 
 			   
-			   var onError = function(err) {
-  				alert("error");
-	                   };
+			   	var onError = function(err) {
+  					alert("error");
+	                   	};
 			  
-			   var onSuccess = function(givemearesult) {
-                                var tokenstored = givemearesult.customerDetails[0].customerId;
-                                localStorage.setItem('LPCustomerID', tokenstored);
-			   };   
-			   var pathToData = "SDE";
-			   lpTag.agentSDK.get(pathToData, onSuccess, onError);
+			   	var onSuccess = function(givemearesult) {
+                                	var tokenstored = givemearesult.customerDetails[0].customerId;
+                                	localStorage.setItem('LPCustomerID', tokenstored);
+			   	};   
+			   	var pathToData = "SDE";
+			   	lpTag.agentSDK.get(pathToData, onSuccess, onError);
 						     
-                  }, 1000);
+                  	}, 1000);
+		  };
+		  $(window).one("focus", ActiveWindow);
             });
   
         
