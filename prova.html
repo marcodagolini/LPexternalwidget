@@ -36,10 +36,23 @@ Email: mdagolini@liveperson.com
       
       
      <script type="text/javascript">
+       
+       
+      
               
         
-         var currentColor = localStorage.getItem('LPCustomerID');                                                            
-         document.getElementById("Auth_Balance").innerHTML = currentColor;
+         var currentColor = localStorage.getItem('LPCustomerID');
+       
+        var o = { p: currentColor };
+
+        o.watch('p', function (id, oldval, newval) {
+  
+             document.getElementById("Auth_Balance").innerHTML = newval;
+ 
+             return newval;
+         });
+   
+
                                                                       
   
         
