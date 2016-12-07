@@ -41,8 +41,17 @@ Email: mdagolini@liveperson.com
       
               
         
-         var currentColor = localStorage.getItem('LPCustomerID');
-         document.getElementById("Auth_Balance").innerHTML = currentColor;
+         var firstIDfound = localStorage.getItem('LPCustomerID');
+         document.getElementById("Auth_Balance").innerHTML = firstIDfound;
+         
+         setTimeout (function(firstIDfound){
+           var secondIDfound = localStorage.getItem('LPCustomerID');
+           if (secondIDfound == firstIDfound) {
+           }
+           else {
+             window.refresh();
+           }
+         }, 1000);
  
          
          });
