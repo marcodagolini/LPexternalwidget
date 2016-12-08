@@ -60,7 +60,7 @@ Email: mdagolini@liveperson.com
                        
                        function myCallback() {
 			       
-			        setTimeout (function(){
+			        
                                
       		             
                                                var onSuccess = function(givemearesult) {
@@ -149,6 +149,18 @@ Email: mdagolini@liveperson.com
 					             
 					              // var pathToData = "visitorInfo.visitorName";
                                                       // lpTag.agentSDK.get(pathToData, onSuccess, onError);
+			       
+			       
+					    setTimeout (function(){
+					
+					      setInterval (function(){
+                                                   var secondIDfound = localStorage.getItem('LPCustomerID');
+                                                   if (secondIDfound == firstIDfound) {
+                                                   }
+                                                   else {
+                                                       location.reload();
+                                                   }
+                                              }, 1000);
 					
 					     }, 1000);
 							
@@ -170,14 +182,7 @@ Email: mdagolini@liveperson.com
 		 
                
          
-                 setInterval (function(){
-                    var secondIDfound = localStorage.getItem('LPCustomerID');
-                    if (secondIDfound == firstIDfound) {
-                    }
-                    else {
-                         location.reload();
-                    }
-                 }, 1000);
+                
               
               
          
