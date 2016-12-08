@@ -75,7 +75,7 @@ Email: mdagolini@liveperson.com
 				}
 				else {
 
-					var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ tokenstored + "'";
+					var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ firstIDfound + "'";
                                         var queryString = encodeURIComponent(String);        
                                         var myURL = 'https://docs.google.com/spreadsheets/d/1-bGbupGHbTfYv0aNEchYzU2dvIPTWiYGNaF427AO9oI/gviz/tq?gid=342369015&tq=' + queryString;
                                         var query = new google.visualization.Query(myURL);
