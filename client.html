@@ -57,45 +57,41 @@ Email: mdagolini@liveperson.com
                        function myCallback() {
 			       
 						     
-                                                      if (firstIDfound == "unknown") {
+                            if (firstIDfound == "unknown") {
 							      
-							                document.getElementById("scrittatitolo").innerHTML = "This Visitor is NOT authenticated";
-                                                                        document.getElementById("scrittatitolo").style.color = "black";
-                                                                        document.getElementById("Auth_Name").style.color = "black";
-                                                                        document.getElementById("Auth_Phone").style.color = "black";
-                                                                        document.getElementById("Auth_Email").style.color = "black";
-                                                                        document.getElementById("Auth_Balance").style.color = "black";
-							                document.getElementById("Auth_Name").innerHTML = '';
-                                                                        document.getElementById("Auth_Phone").innerHTML = '';
-                                                                        document.getElementById("Auth_Email").innerHTML = '';
-                                                                        document.getElementById("Auth_Balance").innerHTML = '';
-                                                                        document.getElementById("contenitore").style.backgroundColor = "yellow";
-                                                                        document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
+				document.getElementById("scrittatitolo").innerHTML = "This Visitor is NOT authenticated";
+                                document.getElementById("scrittatitolo").style.color = "black";
+                                document.getElementById("Auth_Name").style.color = "black";
+                                document.getElementById("Auth_Phone").style.color = "black";
+                                document.getElementById("Auth_Email").style.color = "black";
+                                document.getElementById("Auth_Balance").style.color = "black";
+				document.getElementById("Auth_Name").innerHTML = '';
+                                document.getElementById("Auth_Phone").innerHTML = '';
+                                document.getElementById("Auth_Email").innerHTML = '';
+                                document.getElementById("Auth_Balance").innerHTML = '';
+                                document.getElementById("contenitore").style.backgroundColor = "yellow";
+                                document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
  							      
-						      }
-					              else {
-							      
-							           // var data = JSON.parse(localStorage.getItem('profile'));
-                                                                   // var identificativo = data.user_id;
-                                                                   // var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ identificativo + "'";
-							           var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ tokenstored + "'";
-                                                                   var queryString = encodeURIComponent(String);        
-                                                                   var myURL = 'https://docs.google.com/spreadsheets/d/1-bGbupGHbTfYv0aNEchYzU2dvIPTWiYGNaF427AO9oI/gviz/tq?gid=342369015&tq=' + queryString;
-                                                                   var query = new google.visualization.Query(myURL);
-                                                                   query.send(handleQueryResponse);
-                                                                   function handleQueryResponse(response) {
+				}
+				else {
+
+					var String = 'SELECT A, B, C, D, E, F WHERE A=' + "'"+ tokenstored + "'";
+                                        var queryString = encodeURIComponent(String);        
+                                        var myURL = 'https://docs.google.com/spreadsheets/d/1-bGbupGHbTfYv0aNEchYzU2dvIPTWiYGNaF427AO9oI/gviz/tq?gid=342369015&tq=' + queryString;
+                                        var query = new google.visualization.Query(myURL);
+                                        query.send(handleQueryResponse);
+                                        function handleQueryResponse(response) {
 									    
-                                                                                                           if (response.isError()) {
-                                                                                                                                    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-                                                                                                                                    return;
-                                                                                                                                               }
-                                                                                                          
-                                                                                                           var data = response.getDataTable();
-                                                                                                           if (data.getNumberOfRows() == 0){
-                                                                                                                                     document.getElementById("scrittatitolo").innerHTML = "Warning!! Invalid oAuth Token";
-                                                                                                                                     document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
-                                                                                                                                     document.getElementById("scrittatitolo").style.color = "red";
-														                     document.getElementById("Auth_Name").innerHTML = 'Name: ??';
+                                                  if (response.isError()) {
+                                                      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                                                      return;
+                                                   }
+                                                  var data = response.getDataTable();
+                                                  if (data.getNumberOfRows() == 0){
+                                                      document.getElementById("scrittatitolo").innerHTML = "Warning!! Invalid oAuth Token";
+                                                      document.getElementById("picture").style.backgroundImage = 'url('+url_unknow+')';
+                                                      document.getElementById("scrittatitolo").style.color = "red";
+						      document.getElementById("Auth_Name").innerHTML = 'Name: ??';
                                                                                                            	                     document.getElementById("Auth_Phone").innerHTML = 'Phone: ??';
                                                                                                           	                     document.getElementById("Auth_Email").innerHTML = 'Email: ??';
                                                                                                           	                     document.getElementById("Auth_Balance").innerHTML = 'Balance: ??';
